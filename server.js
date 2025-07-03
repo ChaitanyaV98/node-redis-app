@@ -24,6 +24,14 @@ async function testRedisConnection() {
 
     const deleteCount = await client.del("name");
     console.log(deleteCount);
+    const extractUpdatedValue = await client.get("name");
+    console.log(extractUpdatedValue); // will return null cz name key is already deleted
+
+    await client.set("count", 100);
+    const incrementCount = await client.incr("count");
+    console.log("Incremented count value", incrementCount);
+    const decrementCount = await client.decr("count");
+    console.log("decrement count value", decrementCount);
   } catch (error) {
     console.log("Error---", error);
   } finally {
