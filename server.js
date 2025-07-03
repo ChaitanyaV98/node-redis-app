@@ -17,10 +17,13 @@ async function testRedisConnection() {
     await client.connect();
     console.log("client is now connected to redis server");
     //set and get values
-    await client.set("key", "value-ChaithuMa");
+    await client.set("name", "value-ChaithuMa");
 
     const extractValue = await client.get("key");
     console.log(extractValue);
+
+    const deleteCount = await client.del("name");
+    console.log(deleteCount);
   } catch (error) {
     console.log("Error---", error);
   } finally {
