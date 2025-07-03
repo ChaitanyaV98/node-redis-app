@@ -1,0 +1,20 @@
+1. Basic Concepts and operations like get, set, delete etc... of redis
+2. Redis Data structures
+3. pub/sub
+4. package io-redis
+
+
+What is redis?
+Redis - Remote Dictinary Server
+it is an open source, in memory database(Keeps all data in RAM → blazing fast read/write speeds.)
+primarily used for database, cache
+It stores key-value pairs — think of it like a super-fast, temporary database.
+Can persist data to disk if needed, but speed comes from RAM.
+Supports advanced data structures: strings, hashes, lists, sets, sorted sets, bitmaps, streams, etc.
+ It supports pub/sub, which enables real time communication b/w clients and also helps in transactions
+
+
+ use cases
+ - caching
+ - session management
+ - Real time analytics
