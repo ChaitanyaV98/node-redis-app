@@ -34,6 +34,10 @@ async function redisDataStructures(params) {
 
     //LISTS - LPUSH(pushes item to the start of list), RPUSH(pushes item to the END of list)
     //LRANGE(retrieves elements from specific range), LPOP(removes element from start and returns), RPOP(removes from right and returns)
+
+    await client.lPush("notes", ["note1", "note2", "note3"]);
+    const extractAllNotes = await client.lRange("notes", 0, -1);
+    console.log("extractAllNotes", extractAllNotes);
   } catch (error) {
     console.log("Error", error);
   } finally {
