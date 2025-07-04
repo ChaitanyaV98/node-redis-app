@@ -36,15 +36,25 @@ async function redisDataStructures(params) {
     //LRANGE(retrieves elements from specific range), LPOP(removes element from start and returns), RPOP(removes from right and returns)
 
     // await client.lPush("notes", ["note1", "note2", "note3"]);
-    const extractAllNotes = await client.lRange("notes", 0, -1);
-    console.log("extractAllNotes", extractAllNotes);
+    //const extractAllNotes = await client.lRange("notes", 0, -1);
+    //console.log("extractAllNotes", extractAllNotes);
     // const firstNote = await client.lPop("notes");
     // console.log("first note after pop", firstNote);
 
-    await client.lPush("notes", ["note2", "note3", "note4"]);
-    await client.rPush("notes", "notes5");
-    const remainingNotes = await client.lRange("notes", 0, -1);
-    console.log("remainingNotes", remainingNotes);
+    //await client.lPush("notes", ["note2", "note3", "note4"]);
+    // await client.rPush("notes", "notes5");
+    // await client.rPush("notes", ["notes6", "notes7"]);
+    // const remainingNotes = await client.lRange("notes", 0, -1);
+    // console.log("remainingNotes", remainingNotes);
+
+    //SETS- SADD(adds one or more members to a set)
+    //SMembers - returns all the elements of a set
+    //SISMEMBER - Checks if item is a member of set
+    //SREM - to remove one or more members of a set
+
+    await client.sAdd("user:nickname", ["john", "varun", "xyz"]);
+    const extractUserNickNames = await client.sMembers("user:nickname");
+    console.log("extractUserNickNames", extractUserNickNames);
   } catch (error) {
     console.log("Error", error);
   } finally {
