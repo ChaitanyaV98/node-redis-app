@@ -63,6 +63,35 @@ async function redisDataStructures(params) {
     console.log("removeXyz", removeXyz);
     const extractUserNickNames = await client.sMembers("user:nickname");
     console.log("extractUserNickNames", extractUserNickNames);
+
+    // we will work with sorted sets -> sorted sets are those which has a score associated each item, redis will maintain the order of the items based on score given to it
+    //sorted sets are helpful for leader boards, priority que
+    //ZAdd- this will add elements with score to a set
+    //ZRANGE will give the range of elements
+    //ZRANK - Gives the rank of a particular element or it'll give position
+    await client.zAdd("cart", [
+      {
+        score: 100,
+        value: "Cart 1",
+      },
+      {
+        score: 150,
+        value: "Cart 2",
+      },
+      {
+        score: 10,
+        value: "Cart 3",
+      },
+    ]);
+    const getCartItems = await client.zRange("cart", 0, -1);
+    console.log(getCartItems);
+
+    const extractAllCartItemsWithScore = await client.zRangeWithScores(
+      "cart",
+      0,
+      -1
+    );
+    console.log(extractAllCartItemsWithScore);
   } catch (error) {
     console.log("Error", error);
   } finally {
