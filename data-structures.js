@@ -92,6 +92,9 @@ async function redisDataStructures(params) {
       -1
     );
     console.log(extractAllCartItemsWithScore);
+
+    const cartTwoRank = await client.zRank("cart", "Cart 2");
+    console.log("Cart two rank", cartTwoRank);
   } catch (error) {
     console.log("Error", error);
   } finally {
