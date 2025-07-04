@@ -53,13 +53,16 @@ async function redisDataStructures(params) {
     //SREM - to remove one or more members of a set
 
     await client.sAdd("user:nickname", ["john", "varun", "xyz"]);
-    const extractUserNickNames = await client.sMembers("user:nickname");
-    console.log("extractUserNickNames", extractUserNickNames);
+
     const isVarunOfUserNickName = await client.sIsMember(
       "user:nickname",
       "varun"
     );
     console.log("isVarunOfUserNickName", isVarunOfUserNickName);
+    const removeXyz = await client.sRem("user:nickname", "xyz");
+    console.log("removeXyz", removeXyz);
+    const extractUserNickNames = await client.sMembers("user:nickname");
+    console.log("extractUserNickNames", extractUserNickNames);
   } catch (error) {
     console.log("Error", error);
   } finally {
