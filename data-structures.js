@@ -55,6 +55,11 @@ async function redisDataStructures(params) {
     await client.sAdd("user:nickname", ["john", "varun", "xyz"]);
     const extractUserNickNames = await client.sMembers("user:nickname");
     console.log("extractUserNickNames", extractUserNickNames);
+    const isVarunOfUserNickName = await client.sIsMember(
+      "user:nickname",
+      "varun"
+    );
+    console.log("isVarunOfUserNickName", isVarunOfUserNickName);
   } catch (error) {
     console.log("Error", error);
   } finally {
