@@ -72,7 +72,7 @@ async function redisDataStructures(params) {
     await client.zAdd("cart", [
       {
         score: 100,
-        value: "Cart 1",
+        value: "Cart 1", // score is now associated for the cart1
       },
       {
         score: 150,
@@ -83,10 +83,11 @@ async function redisDataStructures(params) {
         value: "Cart 3",
       },
     ]);
-    const getCartItems = await client.zRange("cart", 0, -1);
-    console.log(getCartItems);
+    const getCartItems = await client.zRange("cart", 0, -1); // when we pass 0,-1 as the range, it will retrieve all the items in the list
+    console.log("result of get cart items with the range", getCartItems);
 
     const extractAllCartItemsWithScore = await client.zRangeWithScores(
+      // will return array with each having score as well
       "cart",
       0,
       -1
@@ -96,7 +97,6 @@ async function redisDataStructures(params) {
     const cartTwoRank = await client.zRank("cart", "Cart 2");
     console.log("Cart two rank", cartTwoRank);
 
-    //hashing: sets multiple values to a particular item
     //hashes -> HSET, HGET, HGETALL, HDEL
 
     await client.hSet("product1", {
