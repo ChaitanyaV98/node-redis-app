@@ -49,6 +49,14 @@ async function pipeliningAndTransactions(params) {
     const pipelineresults = await pipeline.exec();
 
     console.log("piplelineResults -2 ", pipelineresults);
+
+    //batch operation
+    const batchOperatn = client.multi();
+    for (let i = 0; i < 1000; i++) {
+      batchOperatn.set(`user:${i}:action`, `$Action ${i}`);
+    }
+    const results3 = await batchOperatn.exec();
+    // console.log("piplelineResults -3 ", results3);
   } catch (error) {
     console.log("Error", error);
   } finally {
